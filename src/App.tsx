@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <Header />
        
           {/* Example GrandmasterCard usage */}
-          {/* TODO: Add Search bar, Add pagination, reestructure UI cards in a, add sort newest, order alphabetically breadcumb, etc */}
+          {/* TODO: Add Search bar, Add pagination, reestructure UI cards in a, add sort newest, order alphabetically,  breadcumb, etc */}
            <Routes>
           <Route path="/" element={<GrandmastersPage />} />
           <Route path="/grandmaster/:username" element={<GrandmasterProfilePage />} />

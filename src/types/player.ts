@@ -15,3 +15,17 @@ export interface PlayerProfile {
   league?: string;
   streaming_platforms?: string[];
 }
+
+export interface GrandmasterCardProps {
+  username: string;
+  avatar?: string;
+  country?: string;
+  name?: string;
+  followers?: number;
+  joined?: number;
+  last_online?: number;
+  status?: string;
+  is_streamer?: boolean;
+  verified?: boolean;
+  league?: string;
+}

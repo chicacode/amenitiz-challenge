@@ -3,12 +3,11 @@ interface DashboardProps {
 }
 const Dashboard: React.FC<DashboardProps> = ({ children }) => {
     return (
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 bg-blue-500">
-            <main className="flex flex-col items-center justify-center min-h-screen">
-                <div className="flex items-center justify-between">
-                    <h1 className="text-2xl text-black font-bold">Chess.com Wikipedia page</h1>
-                </div>
+        <div className="w-full mx-auto flex flex-col min-h-screen bg-blue-400">
+            <main className="flex-grow">
+                <div className="container mx-auto px-4 py-6">
                 {children}
+                </div>
             </main>
         </div>
     );
