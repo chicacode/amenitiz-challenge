@@ -10,17 +10,16 @@ import './App.css'
 const App: React.FC = () => {
   return (
     <Router>
-
       <Dashboard>
         <Header />
-        <h1 className="text-2xl font-bold">Grandmaster Players</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+       
           {/* Example GrandmasterCard usage */}
+          {/* TODO: Add Search bar, Add pagination, reestructure UI cards in a, add sort newest, order alphabetically breadcumb, etc */}
            <Routes>
           <Route path="/" element={<GrandmastersPage />} />
           <Route path="/grandmaster/:username" element={<GrandmasterProfilePage />} />
         </Routes>
-        </div>
+      
         <Footer />
       </Dashboard>
 
