@@ -1,10 +1,17 @@
 import './App.css'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
 
   return (
     <>
-      <h1>Chess Wiki Grand Master</h1>
+      <Header />
+      <main className="p-4">
+        <h2 className="text-xl font-semibold">Welcome to My Application</h2>
+        <p className="mt-2">This is a simple application using React and TypeScript.</p>
+      </main>  
+      <Footer />           
     </>
   )
 }
