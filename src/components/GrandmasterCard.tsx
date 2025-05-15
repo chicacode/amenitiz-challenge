@@ -33,10 +33,10 @@ const GrandmasterCard: React.FC<GrandmasterCardProps> = ({
     league,
 }) => {
     return (
-        <Link to={`/grandmaster/${playerId}`} className="block">
+        <Link to={`/grandmaster/${userName}`} className="block">
             <div className="border p-4 rounded-lg hover:shadow-lg transition">
                 {avatar && <img src={avatar} alt={userName} className="w-16 h-16 rounded-full mx-auto" />}
-                <h2 className="text-lg font-semibold text-center mt-2">{userName}</h2>
+                <h2 className="text-lg font-semibold text-center text-gray-500 mt-2">{userName}</h2>
                 {country && <p className="text-center text-sm text-gray-500">{country}</p>}
             </div>
         </Link>

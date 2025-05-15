@@ -2,8 +2,9 @@ import { type PlayerProfile } from "../types/player";
 
 interface UserProfileProps {
     user: PlayerProfile;
-    isLoading: boolean;
-    error: string | null;
+    // TODO: Add more props as needed in the page GMPPage
+    isLoading?: boolean;
+    error?: string | null;
 }
 const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => {           
     if (isLoading) {
@@ -30,4 +31,4 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => 
     );
 }
 export default UserProfile;
-// // This component displays the profile information of a user, including their avatar, username, country, and followers.
+// This component displays the profile information of a user, including their avatar, username, country, and followers.
