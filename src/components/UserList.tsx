@@ -1,4 +1,5 @@
 import GrandmasterCard from "./GrandmasterCard";
+import Loading from "./Loading";
 import { type GrandmasterCardProps } from "../types/player";
 
 interface UserListProps {
@@ -6,9 +7,10 @@ interface UserListProps {
     totalPages: number;
     currentPage: number;
     setCurrentPage: (page: number) => void;
+    isLoading: boolean;
 }
 
-const UserList: React.FC<UserListProps> = ({ users, totalPages, currentPage, setCurrentPage }) => {
+const UserList: React.FC<UserListProps> = ({ users, totalPages, currentPage, setCurrentPage, isLoading }) => {
     const renderPageNumbers = () => {
         const pages = [];
         const maxVisible = 3;
@@ -61,30 +63,38 @@ const UserList: React.FC<UserListProps> = ({ users, totalPages, currentPage, set
     };
     return (
         <div className="space-y-6 p-4">
-            <div className="space-y-3 p-4">
-                {users.map((user: any) => (
-                    <GrandmasterCard
-                        key={user.username}
-                        username={user.username}
-                        avatar={user.avatar}
-                        name={user.name}
-                        country={user.country}
-                        joined={user.joined}
-                        last_online={user.last_online}
-                        followers={user.followers}
-                        status={user.status}
-                        is_streamer={user.is_streamer}
-                        verified={user.verified}
-                        league={user.league}
-                    />
-                ))}
-            </div>
-            <div className="flex justify-center flex-wrap gap-2">
-                {renderPageNumbers()}
-            </div>
+            {
+                isLoading ? (
+                    <div className="flex justify-center items-center h-screen">
+                        <Loading />
+                    </div>
+                ) : (<>
+                    <div className="space-y-3 p-4">
+                        {users.map((user: any) => (
+                            <GrandmasterCard
+                                key={user.username}
+                                username={user.username}
+                                avatar={user.avatar}
+                                name={user.name}
+                                country={user.country}
+                                joined={user.joined}
+                                last_online={user.last_online}
+                                followers={user.followers}
+                                status={user.status}
+                                is_streamer={user.is_streamer}
+                                verified={user.verified}
+                                league={user.league}
+                            />
+                        ))}
+                    </div>
+                    <div className="flex justify-center flex-wrap gap-2">
+                        {renderPageNumbers()}
+                    </div>
+
+                </>
+                )}
+
         </div>
-
-
     );
 };
 export default UserList;

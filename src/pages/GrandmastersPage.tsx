@@ -1,40 +1,40 @@
 import { useEffect, useState } from 'react';
 import { getGrandmasters, getPlayer } from '../services/chessApi';
-import { type PlayerProfile, type GrandmasterCardProps } from '../types/player';
+import { type GrandmasterCardProps } from '../types/player';
 import UserList from '../components/UserList';
 
 const GrandmastersPage: React.FC = () => {
   const [users, setUsers] = useState<GrandmasterCardProps[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<'relevant' | 'newest' | 'oldest'>('relevant');
+  const [isLoading, setIsLoading] = useState(false);
   const usersPerPage = 10;
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getGrandmasters();
-  //     setUsers(data.players);
-  //   };
-  //   fetchData();
-  // }, []);
   useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
       const res = await getGrandmasters();
-      const players = await Promise.all(
-        res.players.map(async (username: string) => {
-          try {
-            const player = await getPlayer(username);
-            return {
-              username: player.username,
-              avatar: player.avatar,
-              country: new URL(player.country).pathname.split('/').pop(),
-              name: player.name,
-              joined: player.joined,
-            };
-          } catch (err) {
-            return { username };
-          }
-        })
+
+      const results = await Promise.allSettled(
+        res.players.map((username: string) => getPlayer(username))
       );
+
+      const players = results.map((result, index) => {
+        if (result.status === 'fulfilled') {
+          const player = result.value;
+          return {
+            username: player.username,
+            avatar: player.avatar,
+            country: new URL(player.country).pathname.split('/').pop(),
+            name: player.name,
+            joined: player.joined,
+          };
+        } else {
+          // Handle the case where the player data could not be fetched
+          return { username: res.players[index] };
+        }
+      });
 
       const sortedPlayers = [...players].sort((a, b) => {
         if (sortBy === 'newest') return (b.joined || 0) - (a.joined || 0);
@@ -43,9 +43,16 @@ const GrandmastersPage: React.FC = () => {
       });
 
       setUsers(sortedPlayers);
-    };
-    fetchData();
-  }, [sortBy]);
+    } catch (error) {
+      console.error("Error fetching players:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchData();
+}, [sortBy]);
+
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value as 'relevant' | 'newest' | 'oldest');
@@ -71,7 +78,7 @@ const GrandmastersPage: React.FC = () => {
           <option value="oldest">Oldest</option>
         </select>
       </div>
-      <UserList users={currentUsers} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <UserList users={currentUsers} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} isLoading={isLoading} />
     </main>
   );
 };
