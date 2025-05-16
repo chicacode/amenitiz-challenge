@@ -16,7 +16,7 @@ const GrandmastersPage: React.FC = () => {
   //   };
   //   fetchData();
   // }, []);
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const res = await getGrandmasters();
       const players = await Promise.all(
@@ -39,7 +39,7 @@ useEffect(() => {
       const sortedPlayers = [...players].sort((a, b) => {
         if (sortBy === 'newest') return (b.joined || 0) - (a.joined || 0);
         if (sortBy === 'oldest') return (a.joined || 0) - (b.joined || 0);
-        return 0; 
+        return 0;
       });
 
       setUsers(sortedPlayers);
@@ -58,39 +58,20 @@ useEffect(() => {
   const totalPages = Math.ceil(users.length / usersPerPage);
 
   return (
-    // <main className="flex-1">
-    //   <h1 className="text-gray-600 text-2xl font-bold m-4">Grandmaster Players</h1>
-    //   <p className="text-gray-600 mb-4 ml-4">All Grandmaster players from the chess API.</p>
-       
-    //   <UserList users={users} />
-    // </main>
-        <main className="flex-1 p-6">
+    <main className="flex-1 p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-gray-800">Top Chess Grandmasters</h2>
         <select
           onChange={handleSortChange}
           value={sortBy}
-          className="border border-gray-300 rounded px-3 py-1 text-sm"
+          className="border border-blue-300 rounded px-3 py-1 text-sm"
         >
           <option value="relevant">Sort by: Relevant</option>
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
         </select>
       </div>
-      <UserList users={currentUsers} />
-      <div className="flex justify-center mt-6 gap-2">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-3 py-1 rounded border text-sm ${
-              currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      <UserList users={currentUsers} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </main>
   );
 };

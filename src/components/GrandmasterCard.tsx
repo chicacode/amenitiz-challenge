@@ -2,22 +2,6 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from 'react-icons/fa';
 import {type GrandmasterCardProps} from "../types/player";
 
-// interface GrandmasterCardProps {
-//     avatar?: string;
-//     playerId: number;
-//     id: number;
-//     url: string;
-//     name?: string;
-//     userName: string;
-//     followers?: number;
-//     country?: string;
-//     last_online: number;
-//     joined: number;
-//     status: string;
-//     isStreamer: boolean;
-//     verified: boolean;
-//     league: string;
-// }
 const GrandmasterCard: React.FC<GrandmasterCardProps> = ({
     avatar,
     name,
