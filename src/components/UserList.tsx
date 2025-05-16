@@ -1,31 +1,28 @@
 import GrandmasterCard from "./GrandmasterCard";
-import { type PlayerProfile } from "../types/player";
+import { type GrandmasterCardProps } from "../types/player";
 
 interface UserListProps {
-    users: PlayerProfile[];
+    users: GrandmasterCardProps[];
 }
 
 const UserList: React.FC<UserListProps> = ({ users }) => {
     return (
         <div className="space-y-3 p-4">
             {users.map((user: any) => (
-                console.log("hello",user),
+
                 <GrandmasterCard
-                    key={user.id}
-                    playerId={user.playerId}
-                    id={user.id}
-                    url={user.url}
-                    name={user}
-                    userName={user}
-                    followers={user.followers}
+                    key={user.username}
+                    username={user.username}
+                    avatar={user.avatar}
+                    name={user.name}
                     country={user.country}
-                    last_online={user.last_online}
                     joined={user.joined}
+                    last_online={user.last_online}
+                    followers={user.followers}
                     status={user.status}
-                    isStreamer={user.isStreamer}
+                    is_streamer={user.is_streamer}
                     verified={user.verified}
                     league={user.league}
-                    avatar={user.avatar}
                 />
             ))}
         </div>

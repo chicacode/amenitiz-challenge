@@ -15,7 +15,7 @@ export interface PlayerProfile {
   league?: string;
   streaming_platforms?: string[];
 }
-
+// DTO
 export interface GrandmasterCardProps {
   username: string;
   avatar?: string;

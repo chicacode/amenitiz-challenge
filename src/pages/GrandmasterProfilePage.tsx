@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getPlayer } from '../services/chessApi';
 import { type PlayerProfile } from '../types/player';
 import UserProfile from '../components/UserProfile';
@@ -7,6 +7,7 @@ import UserProfile from '../components/UserProfile';
 const GrandmasterProfilePage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
   const [player, setPlayer] = useState<PlayerProfile | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlayer = async () => {
@@ -20,6 +21,9 @@ const GrandmasterProfilePage: React.FC = () => {
 
   return (
     <main className="flex-1">
+       <button onClick={() => navigate(-1)} className="flex items-center text-blue-600 hover:underline m-4">
+        ← Back to list
+      </button>
       {player ? <UserProfile user={player} /> : <p className="text-center mt-10">Loading...</p>}
     </main>
   );
