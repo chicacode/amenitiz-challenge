@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 interface ClockProps {
-  lastOnline: number; // Unix timestamp in seconds
+  lastOnline: number; 
 }
 
 const Clock: React.FC<ClockProps> = ({ lastOnline }) => {
