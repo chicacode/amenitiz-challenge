@@ -75,6 +75,8 @@ src/
 
  Implement server-side rendering (SSR) with Next.js for SEO (optional)
 
+ Finish Sidebar adding Favorites, Recent Searches and Settings pages
+
 ### Dashboard
 ![Screenshot](./src/assets/dashboard.png)
 
