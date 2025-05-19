@@ -1,27 +1,16 @@
 import { useEffect, useState } from 'react';
 import { type PlayerProfile } from "../types/player";
+import { getCountryCode, getFlagEmoji } from '../utils/countryUtils';
 import { useNavigate } from 'react-router-dom';
+import Clock from './Clock';
 import { FaUserCircle, FaArrowLeft } from 'react-icons/fa';
 
 
 interface UserProfileProps {
     user: PlayerProfile;
-    // TODO: Add Clock component to show last online time, search bar to search user
     isLoading?: boolean;
     error?: string | null;
 }
-const getCountryCode = (url: string | undefined): string | null => {
-    if (!url) return null;
-    const segments = url.split('/');
-    return segments[segments.length - 1]?.toUpperCase() || null;
-};
-
-const getFlagEmoji = (countryCode: string | null) => {
-    if (!countryCode || countryCode.length !== 2) return '';
-    return countryCode
-        .toUpperCase()
-        .replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)));
-};
 
 const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => {
     const [elapsed, setElapsed] = useState(0);
@@ -36,13 +25,6 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => 
         const interval = setInterval(updateElapsed, 1000);
         return () => clearInterval(interval);
     }, [user.last_online]);
-
-    const formatElapsed = (seconds: number) => {
-        const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
-        const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-        const secs = String(seconds % 60).padStart(2, '0');
-        return `${hrs}:${mins}:${secs}`;
-    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -92,11 +74,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => 
                     <span className="font-medium text-blue-500">{elapsed < 60 ? `${elapsed} seconds ago` : `${Math.floor(elapsed / 60)} minutes ago`}</span>
                 </div>
             </div>
-
             <div className="text-center">
                 <div className="text-sm text-gray-500 mb-1">Last seen</div>
-                <div className="text-xl font-semibold text-blue-500">{formatElapsed(elapsed)}</div>
+                <Clock lastOnline={user.last_online || Math.floor(Date.now() / 1000)} />
             </div>
+
 
             <div className="text-center">
                 <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600">
