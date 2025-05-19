@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/Amenitiz_0.png';
 
 const Sidebar: React.FC = () => {
     const navigate = useNavigate();
@@ -7,9 +8,9 @@ const Sidebar: React.FC = () => {
             <div className="space-y-6">
                 <div className="flex items-center pt-0">
                     <img
-                        src="src/assets/Amenitiz_0.png"
+                        src={logo}
                         className="rounded-full"
-                        alt="amenitiz-logo"
+                        alt="Amenitiz-logo"
                         height={200}
                         width={200}
                     />
