@@ -87,7 +87,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone git@github.com:chicacode/amenityz-challenge.git
+git clone git@github.com:chicacode/amenitiz-challenge.git
 
 # Navigate to the folder
 cd amenityz-challenge
