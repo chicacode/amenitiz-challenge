@@ -103,4 +103,4 @@ Open http://localhost:5173 in your browser.
 This project was made by Geraldine as part of a frontend coding challenge.
 
 Made with 💙 by @chicacode
-📌 View Repository
+📌 ![Wiki Chess Grandmasters UI](https://github.com/chicacode/amenityz-challenge)
