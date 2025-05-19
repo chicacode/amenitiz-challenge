@@ -5,7 +5,7 @@ const Sidebar: React.FC = () => {
     return (
         <div className="fixed h-screen w-20 lg:w-64 bg-white p-4 shadow-md z-30">
             <div className="space-y-6">
-                <div className="flex items-center pt-8">
+                <div className="flex items-center pt-0">
                     <img
                         src="src/assets/Amenitiz_0.png"
                         className="rounded-full"
@@ -14,9 +14,6 @@ const Sidebar: React.FC = () => {
                         width={200}
                     />
     
-                </div>
-                <div className="flex items-center justify-center lg:justify-start">
-                    <h2 className="text-xl font-bold text-gray-800">ChessWiki</h2>
                 </div>
                 <ul className="space-y-4 text-sm">
                     <li onClick={() => navigate('/')} className="cursor-pointer flex items-center gap-3 text-gray-700 hover:text-blue-600">

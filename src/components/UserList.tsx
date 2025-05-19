@@ -13,7 +13,6 @@ interface UserListProps {
 const UserList: React.FC<UserListProps> = ({ users, totalPages, currentPage, setCurrentPage, isLoading }) => {
     const renderPageNumbers = () => {
         const pages = [];
-        const maxVisible = 3;
         const leftSide = Math.max(2, currentPage - 1);
         const rightSide = Math.min(totalPages - 1, currentPage + 1);
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { type PlayerProfile } from "../types/player";
 import { useNavigate } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaArrowLeft } from 'react-icons/fa';
+
 
 interface UserProfileProps {
     user: PlayerProfile;
@@ -58,9 +59,10 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => 
         <div className="max-w-md mx-auto mt-10 bg-white rounded-xl shadow-md p-6 space-y-6">
             <button
                 onClick={() => navigate(-1)}
-                className="text-blue-500 hover:text-blue-700 text-xl"
+                className="text-blue-500 hover:text-blue-700 text-l flex items-center"
             >
-                ←
+                <FaArrowLeft className="inline-block mr-2" />
+                Back
             </button>
 
             <div className="flex flex-col items-center space-y-3">
