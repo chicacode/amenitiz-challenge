@@ -32,14 +32,13 @@ This project was built as a frontend technical challenge for Amenitiz. It simula
 
 ## 📁 Folder Structure
 src/
-│
-├── components/ # Reusable UI components (Cards, Header, Sidebar, etc.)
-├── pages/ # Main pages (Home, Profile)
-├── services/ # API request logic
-├── types/ # TypeScript interfaces for player data
-├── utils/ # Utility functions (e.g., flag emoji, country code parsing)
-├── App.tsx # Main layout and router outlet
-└── main.tsx # Entry point for React app
+- components/ # Reusable UI components (Cards, Header, Sidebar, etc.)
+- pages/ # Main pages (GrandmasterProfilePage, GrandmasterPage)
+- services/ # API request logic
+- types/ # TypeScript interfaces for player data and DTO
+- utils/ # Utility functions (e.g., flag emoji, country code parsing)
+- App.tsx # Main layout and router outlet
+- main.tsx # Entry point for React app
 
 
 ---
@@ -60,6 +59,28 @@ src/
 - Node.js v18+
 - Git
 
+### 📈 Future Improvements & TODOs
+
+✅ Improve pagination UI with ellipsis logic
+
+ Add unit tests (Jest + Testing Library)
+
+ Add error boundaries and better fallback UI
+
+ Implement debounce on search input
+
+ Add responsiveness enhancements and mobile optimizations
+
+ Include filters by country or followers
+
+ Implement server-side rendering (SSR) with Next.js for SEO (optional)
+
+### Dashboard
+![Screenshot](./src/assets/dashboard.png)
+
+### Profile Page
+![Screenshot](./src/assets/profile-page.png)
+
 ### Setup
 
 ```bash
@@ -77,23 +98,8 @@ npm run dev
 
 Open http://localhost:5173 in your browser.
 
-📈 Future Improvements & TODOs
 
-✅ Improve pagination UI with ellipsis logic
-
- Add unit tests (Jest + Testing Library)
-
- Add error boundaries and better fallback UI
-
- Implement debounce on search input
-
- Add responsiveness enhancements and mobile optimizations
-
- Include filters by country or followers
-
- Implement server-side rendering (SSR) with Next.js for SEO (optional)
-
- ✨ Demo
+✨ Demo
 This project was made by Geraldine as part of a frontend coding challenge.
 
 Made with 💙 by @chicacode
