@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { type GrandmasterCardProps } from "../types/player";
+import { getCountryCode, getFlagEmoji } from '../utils/countryUtils';
 import { FaUserCircle } from 'react-icons/fa';
-import {type GrandmasterCardProps} from "../types/player";
 
 const GrandmasterCard: React.FC<GrandmasterCardProps> = ({
     avatar,
@@ -8,6 +9,8 @@ const GrandmasterCard: React.FC<GrandmasterCardProps> = ({
     username,
     country,
 }) => {
+    const countryCode = getCountryCode(country);
+    const flag = getFlagEmoji(countryCode);
     return (
         <Link to={`/grandmaster/${username}`} className="block">
             <div className="flex items-center justify-between p-4 border rounded-lg bg-white hover:shadow transition">
@@ -27,7 +30,7 @@ const GrandmasterCard: React.FC<GrandmasterCardProps> = ({
                         <span className="text-sm text-gray-500">{country}</span>
                     </div>
                 </div>
-                <span className="text-xl">🏳️</span>
+                <span className="text-xl">{flag ? flag : '🏳️'}</span>
             </div>
         </Link>
     );
