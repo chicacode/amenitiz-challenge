@@ -105,4 +105,4 @@ Open http://localhost:5173 in your browser.
 This project was made by Geraldine as part of a frontend coding challenge.
 
 Made with 💙 by @chicacode
-📂 [Visit the Repository](https://github.com/chicacode/amenityz-challenge)
+📂 [Visit the Repository](https://github.com/chicacode/amenitiz-challenge)
