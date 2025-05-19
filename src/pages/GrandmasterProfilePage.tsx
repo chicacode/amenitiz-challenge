@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getPlayer } from '../services/chessApi';
 import { type PlayerProfile } from '../types/player';
 import UserProfile from '../components/UserProfile';
-import { FaArrowLeft } from 'react-icons/fa';
+
 
 const GrandmasterProfilePage: React.FC = () => {
   const { username } = useParams<{ username: string }>();
@@ -22,9 +22,9 @@ const GrandmasterProfilePage: React.FC = () => {
 
   return (
     <main className="flex-1">
-       <button onClick={() => navigate(-1)} className="flex items-center text-blue-600 hover:underline m-4">
+       {/* <button onClick={() => navigate(-1)} className="flex items-center text-blue-600 hover:underline m-4">
         <FaArrowLeft className="inline-block mr-2" />
-      </button>
+      </button> */}
       {player ? <UserProfile user={player} /> : <p className="text-center mt-10">Loading...</p>}
     </main>
   );

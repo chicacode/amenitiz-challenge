@@ -40,7 +40,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => 
     return (
         <div className="max-w-md mx-auto mt-10 bg-white rounded-xl shadow-md p-6 space-y-6">
             <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/', { state: { resetSearch: true } })}
                 className="text-blue-500 hover:text-blue-700 text-l flex items-center"
             >
                 <FaArrowLeft className="inline-block mr-2" />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getGrandmasters, getPlayer } from '../services/chessApi';
 import { type GrandmasterCardProps } from '../types/player';
 import UserList from '../components/UserList';
@@ -7,21 +8,32 @@ import SearchBar from '../components/SearchBar';
 
 const GrandmastersPage: React.FC = () => {
   const [users, setUsers] = useState<GrandmasterCardProps[]>([]);
+  const location = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<'relevant' | 'newest' | 'oldest'>('relevant');
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const usersPerPage = 10;
 
-
-
+  // Reset Search Term and Current Page when navigating back from UserProfile
   useEffect(() => {
+    if (location.state?.resetSearch) {
+      setSearchTerm('');
+      setCurrentPage(1);
 
+       window.history.replaceState({}, document.title);
+    }
+  }, [location.state])
+
+  // Fetch grandmasters data
+  useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
         const res = await getGrandmasters();
-        // Avoid total failure if one of the requests fails
+        if (!res || !res.players) {
+          throw new Error('No players found');
+        }
         const results = await Promise.allSettled(
           res.players.map((username: string) => getPlayer(username))
         );
@@ -46,7 +58,7 @@ const GrandmastersPage: React.FC = () => {
         }).filter((player): player is GrandmasterCardProps => player !== null); // Filter out null players
 
         setUsers(players);
-        setCurrentPage(1);
+        // setCurrentPage(1);
       } catch (error) {
         console.error("Error fetching players:", error);
       } finally {
@@ -58,9 +70,7 @@ const GrandmastersPage: React.FC = () => {
   }, [searchTerm, sortBy]);
 
 
-
   // Filter users based on the search term
-
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
