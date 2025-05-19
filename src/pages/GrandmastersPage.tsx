@@ -13,36 +13,40 @@ const GrandmastersPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const usersPerPage = 10;
 
+
+
   useEffect(() => {
 
     const fetchData = async () => {
       setIsLoading(true);
-      setCurrentPage(1);
       try {
         const res = await getGrandmasters();
-
+        // Avoid total failure if one of the requests fails
         const results = await Promise.allSettled(
           res.players.map((username: string) => getPlayer(username))
         );
+
         const players = results.map((result, index) => {
           if (result.status === 'fulfilled') {
             const player = result.value;
             return {
               username: player.username,
-              avatar: player.avatar,
-              country: new URL(player.country).pathname.split('/').pop(),
+              avatar: player.avatar ?? undefined,
+              country: player.country ? new URL(player.country).pathname.split('/').pop() : undefined,
               name: player.name,
               joined: player.joined,
               followers: player.followers,
               last_online: player.last_online
-            };
+            } as GrandmasterCardProps;
           } else {
             // Handle the case where the player data could not be fetched
-            return { username: res.players[index] };
+            console.warn(`Failed to fetch player: ${res.players[index]}`);
+            return null;
           }
-        });
+        }).filter((player): player is GrandmasterCardProps => player !== null); // Filter out null players
 
         setUsers(players);
+        setCurrentPage(1);
       } catch (error) {
         console.error("Error fetching players:", error);
       } finally {
@@ -52,6 +56,8 @@ const GrandmastersPage: React.FC = () => {
 
     fetchData();
   }, [searchTerm, sortBy]);
+
+
 
   // Filter users based on the search term
 

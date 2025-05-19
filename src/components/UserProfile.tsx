@@ -78,13 +78,6 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, error }) => 
                 <div className="text-sm text-gray-500 mb-1">Last seen</div>
                 <Clock lastOnline={user.last_online || Math.floor(Date.now() / 1000)} />
             </div>
-
-
-            <div className="text-center">
-                <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600">
-                    Show random grodmaster
-                </button>
-            </div>
         </div>
     );
 }
